@@ -31,10 +31,15 @@ axios.get("https://lambda-times-backend.herokuapp.com/articles")
         console.log(errorResponse);
     })
     .then((successResponse) => {
-        cardMaker(successResponse)
+        const object = successResponse.data.articles;
+        cardMaker(object);
     });
-
+    
     const cardMaker = (obj) => {
+        const parent = document.querySelector(".cards-container");
+        const newArr = new Array(obj.bootstrap, obj.javascript, obj.jquery, obj.node, obj.technology);
+        // console.log(newArr);
+        newArr.forEach(data => {
         const cardDiv = document.createElement("div");
         const headline = document.createElement("div");
         const author = document.createElement("div");
@@ -48,17 +53,25 @@ axios.get("https://lambda-times-backend.herokuapp.com/articles")
         author.classList.add("author");
         imgDiv.classList.add("img-container");
 
+        //HTML structure
+        parent.appendChild(cardDiv);
+        cardDiv.appendChild(headline);
+        cardDiv.appendChild(author);
+        author.appendChild(imgDiv);
+        author.appendChild(name);
+        imgDiv.appendChild(img);
 
-        const newArr = new Array(obj.data.articles.bootstrap, obj.data.articles.javascript, obj.data.articles.jquery, obj.data.articles.node, obj.data.articles.technology);
-        console.log(newArr);
+        //add event listener
+        cardDiv.addEventListener("click", () => {
+            console.log(headline);
+        })
+        
         //add content
-        newArr.forEach(data => {
             data.forEach(text => {
                 headline.textContent = text.headline;
                 img.src = text.authorPhoto;
                 name.textContent = text.authorName;
             })
-            console.log(headline, name);
         })
-
+      
     }

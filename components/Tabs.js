@@ -24,8 +24,8 @@ axios.get("https://lambda-times-backend.herokuapp.com/topics")
 
 const tabMaker = (obj) => {
         const topicDiv = document.querySelector(".topics");
-         console.log(topicDiv);
-         console.log(obj.data.topics);
+        //  console.log(topicDiv);
+        //  console.log(obj.data.topics);
             obj.data.topics.forEach(data => {
                 const topic = document.createElement("div");
 
@@ -39,5 +39,5 @@ const tabMaker = (obj) => {
                 //HTML structure
                 topicDiv.appendChild(topic);
             })
-        console.log(topicDiv);
+        // console.log(topicDiv);
      }
